@@ -1,4 +1,5 @@
 @import "./styles/mixins/screen.scss";
+@import "./styles/variables.scss";
 
 .App {
   display: flex;
@@ -29,7 +30,7 @@
     bottom: 66%;
     // height: 300px;
 
-    background-image: linear-gradient(#ffe259, #ffa751);
+    background-image: linear-gradient($c-yellow, $c-orange);
 
   }
 }

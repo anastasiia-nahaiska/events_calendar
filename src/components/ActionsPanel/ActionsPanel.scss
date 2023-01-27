@@ -3,12 +3,15 @@
 .actions_panel {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   width: 100%;
 
+  &__form {
+    position: relative;
+  }
+
   &__open_form {
-    // padding: 10px;
-    align-self: flex-start;
     display: flex;
     justify-content: center;
     align-items: center;

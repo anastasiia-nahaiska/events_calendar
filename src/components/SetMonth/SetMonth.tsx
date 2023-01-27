@@ -15,7 +15,7 @@ export const SetMonth: React.FC = () => {
       <button className="set_month__button" onClick={setPrevMonth}></button>
 
       <p className="set_month__curr_month">
-        {selectedDate.toLocaleString('default', { month: 'long' })}
+        {`${selectedDate.toLocaleString('default', { month: 'long' })} ${selectedDate.getFullYear()}`}
       </p>
 
       <button className="set_month__button" onClick={setNextMonth}></button>
