@@ -10,10 +10,10 @@ export const Calendar: React.FC = () => {
   const selectedDate = useAppSelector(state => state.selectedDate)
   const selectedYear = selectedDate.getFullYear();
   const selectedMonth = selectedDate.getMonth();
-  const selectedDay = selectedDate.getDate();
   const visibleDates = getVisibleDates(selectedMonth, selectedYear);
-  console.log(selectedDate)
-  console.log(visibleDates)
+  const now = new Date();
+  const today = `${now.getDate()} ${now.getMonth()} ${now.getFullYear()}`;
+
   return (
     <div className="calendar">
       <DaysOfWeek />
@@ -23,6 +23,7 @@ export const Calendar: React.FC = () => {
           key={`${day.getDate()}` + `${day.getMonth()}`}
           day={day.getDate()} 
           isOtherMonth={selectedDate.getMonth() !== day.getMonth()}
+          isToday={today === `${day.getDate()} ${day.getMonth()} ${day.getFullYear()}`}
         />
       ))}   
     </div>

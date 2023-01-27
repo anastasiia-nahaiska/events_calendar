@@ -2,9 +2,11 @@
 
 .dayOfWeek {
   color: $c-black;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 500;
   text-transform: uppercase;
+
+  color: $c-white;
 
   &--current {
     color: $c-red;

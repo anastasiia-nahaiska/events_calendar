@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.scss';
+import { ActionsPanel } from './components/ActionsPanel';
 import { Calendar } from './components/Calendar';
-import { SetMonth } from './components/SetMonth';
 
 function App() {
   return (
     <div className="App">
-      <SetMonth />
+      <div className="App__background"></div>
+
+      <ActionsPanel />
       
       <Calendar />
     </div>

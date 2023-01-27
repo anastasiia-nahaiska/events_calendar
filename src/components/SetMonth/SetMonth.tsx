@@ -12,17 +12,13 @@ export const SetMonth: React.FC = () => {
 
   return (
     <div className="set_month">
-      <button className="set_month__prev" onClick={setPrevMonth}>
-        {'<'}
-      </button>
+      <button className="set_month__button" onClick={setPrevMonth}></button>
 
       <p className="set_month__curr_month">
         {selectedDate.toLocaleString('default', { month: 'long' })}
       </p>
 
-      <button className="set_month__next" onClick={setNextMonth}>
-        {'>'}
-      </button>
+      <button className="set_month__button" onClick={setNextMonth}></button>
     </div>
   )
 }
