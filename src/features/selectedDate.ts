@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const selectedDateSlice = createSlice({
@@ -11,14 +12,22 @@ const selectedDateSlice = createSlice({
       if (date.getMonth() === 11) {
         return new Date(date.getFullYear() + 1, 0, date.getDate());
       } else {
-        return new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        return new Date(
+          date.getFullYear(),
+          date.getMonth() + 1,
+          date.getDate()
+        );
       }
     },
     setPrevMonth: (date)  => {
       if (date.getMonth() === 0) {
         return date = new Date(date.getFullYear() - 1, 11, date.getDate());
       } else {
-        return date = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+        return date = new Date(
+          date.getFullYear(),
+          date.getMonth() - 1,
+          date.getDate()
+        );
       }
     }
   },

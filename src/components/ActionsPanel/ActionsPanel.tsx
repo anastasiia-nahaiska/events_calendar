@@ -14,11 +14,15 @@ export const ActionsPanel: React.FC = () => {
     setIsOpenForm(state => !state);
   };
 
+  const onCloseFrom = () => {
+    setIsOpenForm(false);
+  };
+
   return (
     <div className="actions_panel">
       <div className="actions_panel__form">
         <div className="actions_panel__open_form" onClick={onFormClick}></div>
-        {isOpenForm && <EventForm />}
+        {isOpenForm && <EventForm onCloseFrom={onCloseFrom} />}
       </div>
 
       <SetMonth />

@@ -1,12 +1,12 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { actions as selectedDateActions } from "../../features/selectedDate";
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { actions as selectedDateActions } from '../../features/selectedDate';
 
 import './SetMonth.scss';
 
 export const SetMonth: React.FC = () => {
   const dispatch = useAppDispatch();
-  const selectedDate = useAppSelector(state => state.selectedDate)
+  const selectedDate = useAppSelector(state => state.selectedDate);
   const setNextMonth = () => dispatch(selectedDateActions.setNextMonth());
   const setPrevMonth = () => dispatch(selectedDateActions.setPrevMonth());
 
@@ -20,5 +20,5 @@ export const SetMonth: React.FC = () => {
 
       <button className="set_month__button" onClick={setNextMonth}></button>
     </div>
-  )
-}
+  );
+};

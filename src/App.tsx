@@ -3,7 +3,7 @@ import './App.scss';
 import { ActionsPanel } from './components/ActionsPanel';
 import { Calendar } from './components/Calendar';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <div className="App__background"></div>
@@ -13,6 +13,6 @@ function App() {
       <Calendar />
     </div>
   );
-}
+};
 
 export default App;

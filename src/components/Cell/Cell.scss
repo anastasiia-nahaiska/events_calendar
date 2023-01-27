@@ -11,6 +11,12 @@
   color: $c-black;
   border-radius: 10px;
 
+  overflow-y: auto;
+
+  &__date {
+    margin-bottom: 6px;
+  }
+
   &--another_month {
     color: $c-gray;
   }
@@ -18,9 +24,5 @@
   &--today {
     color: $c-red;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    // background-color: rgba(255, 185, 81, 0.5);
   }
 }
-// #ffe259, #ffa751
-// rgba(255, 226, 89, 0.5)
-// rgba(255, 167, 81, 0.2)
