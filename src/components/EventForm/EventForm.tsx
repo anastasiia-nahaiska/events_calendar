@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from 'moment';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { actions as eventsActions } from "../../features/events";
 import { EventI } from "../../types/Event";
@@ -12,7 +13,7 @@ type Props = {
 export const EventForm: React.FC<Props> = ({ onCloseFrom }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [date, setDate] = useState(moment(new Date()).format(("YYYY-MM-DD")));
   // const [time, setTime] = useState(new Date().getTime());
   const events = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
