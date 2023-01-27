@@ -1,26 +1,19 @@
 import React from 'react';
-import cn from 'classnames';
 
 import { daysOfWeek } from './constants';
 
 import './DaysOfWeek.scss';
 
-export const DaysOfWeek: React.FC = () => {
-  const today = new Date();
+export const DaysOfWeek: React.FC = () =>  (
+  <>
+    {daysOfWeek.map(({ day, id }) => (
+      <p 
+        className={"dayOfWeek"}
+        key={id}
+      >
+        {day}
+      </p> 
+    ))}
+  </>
+);
 
-  return (
-    <>
-      {daysOfWeek.map(({ day, id }, i) => (
-        <p 
-          className={cn(
-            "dayOfWeek",
-            {"dayOfWeek--current": i === today.getDay()}
-          )}
-          key={id}
-        >
-          {day}
-        </p> 
-      ))}
-    </>
-  );
-};

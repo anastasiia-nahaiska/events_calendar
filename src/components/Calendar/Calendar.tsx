@@ -25,8 +25,6 @@ export const Calendar: React.FC = () => {
     dispatch(eventsActions.set(eventsFromLS))
   );
 
-  // eslint-disable-next-line no-console
-
   useEffect(() => {
     getEventsFromLocalStorage(eventsInLS);
   }, []);
@@ -46,13 +44,13 @@ export const Calendar: React.FC = () => {
     <div className="calendar">
       <DaysOfWeek />
 
-      {visibleDates.map(day => (
+      {visibleDates.map(date => (
         <Cell 
-          key={`${day.getDate()}` + `${day.getMonth()}`}
-          day={day.getDate()} 
-          isOtherMonth={selectedDate.getMonth() !== day.getMonth()}
-          isToday={today === `${day.getDate()} ${day.getMonth()} ${day.getFullYear()}`}
-          events={getFilteredEvents(day, events)}
+          key={`${date.getDate()}` + `${date.getMonth()}`}
+          date={date} 
+          isOtherMonth={selectedDate.getMonth() !== date.getMonth()}
+          isToday={today === `${date.getDate()} ${date.getMonth()} ${date.getFullYear()}`}
+          events={getFilteredEvents(date, events)}
         />
       ))}   
     </div>

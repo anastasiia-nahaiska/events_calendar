@@ -1,32 +1,48 @@
+/* eslint-disable no-console */
 import React from 'react';
 import cn from 'classnames';
+import moment from 'moment';
 
 import './Cell.scss';
 import { EventI } from '../../types/Event';
 import { Event } from '../Event';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { actions as selectedDayActions } from '../../features/selectedDate';
 
 type Props = {
-  day: number;
+  date: Date;
   isOtherMonth: boolean;
   isToday: boolean;
   events: EventI[];
 };
 
 export const Cell: React.FC<Props> = ({ 
-  day, 
+  date, 
   isOtherMonth, 
   isToday, 
   events 
 }) => {
+  const dispatch = useAppDispatch();
+  const selectedDate = useAppSelector(state => state.selectedDate);
+
+  const setSelectedDate = (choosedDay: Date) => (
+    dispatch(selectedDayActions.set(choosedDay))
+  );
+
+  const isSelected = moment(selectedDate).format("YYYY-MM-DD") 
+    === moment(date).format("YYYY-MM-DD");
+
   return (
     <div 
+      onClick={() => setSelectedDate(date)}
       className={cn(
         "cell",
         {"cell--another_month": isOtherMonth},
-        {"cell--today": isToday}
+        {"cell--today": isToday},
+        {"cell--selected": isSelected}
       )}
     >
-      <p className="cell__date">{day}</p>
+      <p className="cell__date">{date.getDate()}</p>
 
       {events.map(event => <Event key={event.id} event={event} />)}
     </div>

@@ -7,6 +7,8 @@ const selectedDateSlice = createSlice({
   reducers: {
     set: (date, action: PayloadAction<Date>) => {
       date = action.payload;
+
+      return date;
     },
     setNextMonth: (date) => {
       if (date.getMonth() === 11) {

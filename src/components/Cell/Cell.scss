@@ -23,6 +23,11 @@
 
   &--today {
     color: $c-red;
+
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+  }
+
+  &--selected {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 }
