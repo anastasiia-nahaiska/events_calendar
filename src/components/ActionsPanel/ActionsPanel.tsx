@@ -11,8 +11,8 @@ export const ActionsPanel: React.FC = () => {
   const [isOpenForm, setIsOpenForm] = useState(false);
   
   const onFormClick = () => {
-    setIsOpenForm(state => !state)
-  }
+    setIsOpenForm(state => !state);
+  };
 
   return (
     <div className="actions_panel">
@@ -24,5 +24,5 @@ export const ActionsPanel: React.FC = () => {
       <SetMonth />
       
     </div>
-  )
-}
+  );
+};

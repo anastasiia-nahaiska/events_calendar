@@ -18,35 +18,35 @@ export const EventForm: React.FC = () => {
           className="event_form__input" 
           required
         />
-        </label>
+      </label>
+      <label className="event_form__item" >
+        Description
+        <textarea 
+          className="event_form__input event_form__description" 
+        />
+      </label>
+
+      <div className="event_form__event_date">
         <label className="event_form__item" >
-          Description
-          <textarea 
-            className="event_form__input event_form__description" 
+          Date
+          <input 
+            type="text" 
+            className="event_form__input" 
+            required
           />
-          </label>
+        </label>
 
-        <div className="event_form__event_date">
-          <label className="event_form__item" >
-            Date
-            <input 
-              type="text" 
-              className="event_form__input" 
-              required
-            />
-          </label>
+        <label className="event_form__item" >
+          Time
+          <input 
+            type="time" 
+            className="event_form__input" 
+            placeholder="Title"
+          />
+        </label>
+      </div>
 
-          <label className="event_form__item" >
-            Time
-            <input 
-              type="time" 
-              className="event_form__input" 
-              placeholder="Title"
-            />
-          </label>
-        </div>
-
-        <button className="event_form__submit" type="submit">Add</button>
+      <button className="event_form__submit" type="submit">Add</button>
     </form>
-  )
-}
+  );
+};
