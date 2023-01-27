@@ -1,4 +1,4 @@
-// export const getVisibleDays = (month: number, year: number) => {
+// export const getVisibleDates = (month: number, year: number) => {
 //   const allDaysInMonth = Array.from(
 //     { length: new Date(year, month, 0).getDate() },
 //     (_, i) => new Date(year, month - 1, i + 1)
@@ -32,13 +32,16 @@ export const getVisibleDates = (month: number, year: number) => {
     .reverse();
   
   const allDaysInCurrMonth = Array.from(
-    { length: new Date(year, month, 0).getDate() },
+    { length: new Date(year, month + 1, 0).getDate() },
     (_, i) => new Date(year, month, i + 1)
   );
+  
   const visibleDaysInNextMonth = Array.from(
     { length: 6 - new Date(year, month + 1, 0).getDay() },
     (_, i) => new Date(year, month + 1, i + 1)
   );
+
+  console.log(new Date(year, month + 1, 0).getDate())
 
   return [
     ...visibleDaysInPrevMonth,
