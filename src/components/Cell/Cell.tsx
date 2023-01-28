@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useContext } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
 
@@ -8,6 +8,7 @@ import { EventI } from '../../types/Event';
 import { Event } from '../Event';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { actions as selectedDayActions } from '../../features/selectedDate';
+import { EventFormContext } from '../../context/eventFormContext';
 
 type Props = {
   date: Date;
@@ -24,6 +25,7 @@ export const Cell: React.FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch();
   const selectedDate = useAppSelector(state => state.selectedDate);
+  const { setIsOpenForm } = useContext(EventFormContext);
 
   const setSelectedDate = (choosedDay: Date) => {
     dispatch(selectedDayActions.set(choosedDay));
@@ -35,6 +37,7 @@ export const Cell: React.FC<Props> = ({
   return (
     <div 
       onClick={() => setSelectedDate(date)}
+      onDoubleClick={() => setIsOpenForm(status => !status)}
       className={cn(
         "cell",
         {"cell--another_month": isOtherMonth},

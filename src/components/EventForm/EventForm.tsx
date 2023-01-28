@@ -11,6 +11,7 @@ import { EventFormContext } from "../../context/eventFormContext";
 export const EventForm: React.FC = () => {
   const { setIsOpenForm } = useContext(EventFormContext);
   const { selectedEvent } = useAppSelector(state => state.events);
+  const selectedDate = useAppSelector(state => state.selectedDate);
   const { events } = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
 
@@ -20,7 +21,7 @@ export const EventForm: React.FC = () => {
   const defaultDescription = selectedEvent ? selectedEvent.description : '';
   const defaultDate = selectedEvent 
     ? selectedEvent.date 
-    : moment(new Date()).format(("YYYY-MM-DD"));
+    : moment(selectedDate).format(("YYYY-MM-DD"));
 
   const [title, setTitle] = useState(defaultTitle);
   const [description, setDescription] = useState(defaultDescription);
@@ -32,10 +33,14 @@ export const EventForm: React.FC = () => {
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
+  const handleClosingForm = () => {
+    setIsOpenForm(status => !status);
+    dispatch(eventsActions.resetSelectedEvent());
+  };
+
   const handleRemoveEvent = (id: number) => {
     dispatch(eventsActions.remove(id));
-    dispatch(eventsActions.resetSelectedEvent());
-    setIsOpenForm(status => !status);
+    handleClosingForm();
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,8 +60,7 @@ export const EventForm: React.FC = () => {
 
     if (selectedEvent) {
       addEvent({...newEvent, id: selectedEvent.id });
-      dispatch(eventsActions.resetSelectedEvent());
-      setIsOpenForm(status => !status);
+      handleClosingForm();
 
       return;
     }
@@ -72,7 +76,7 @@ export const EventForm: React.FC = () => {
 
         <div 
           className="event_form__close" 
-          onClick={() => setIsOpenForm(status => !status)}
+          onClick={handleClosingForm}
         ></div>
       </h2>
 
