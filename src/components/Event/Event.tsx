@@ -39,7 +39,7 @@ export const Event: React.FC<Props> = ({ event }) => {
       )}
       onClick={handleOpeningForm}
     >
-      <span className="event__time">{event?.time || '-'}</span>
+      <span className="event__time">{event?.time}</span>
       <p className="event__title">{event.title}</p>
     </div>
   );

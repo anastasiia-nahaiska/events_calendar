@@ -25,7 +25,10 @@ export const EventForm: React.FC = () => {
   const [title, setTitle] = useState(defaultTitle);
   const [description, setDescription] = useState(defaultDescription);
   const [date, setDate] = useState(defaultDate);
-  // const [time, setTime] = useState(new Date().getTime());
+  const [time, setTime] = useState('');
+
+  // eslint-disable-next-line no-console
+  console.log(time);
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
@@ -46,12 +49,11 @@ export const EventForm: React.FC = () => {
       title,
       description,
       date,
+      time,
       id: events.length + 1,
     };
 
     if (selectedEvent) {
-      // eslint-disable-next-line no-console
-      console.log(selectedEvent);
       addEvent({...newEvent, id: selectedEvent.id });
       dispatch(eventsActions.resetSelectedEvent());
       setIsOpenForm(status => !status);
@@ -110,6 +112,8 @@ export const EventForm: React.FC = () => {
           <input 
             type="time" 
             className="event_form__input"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
           />
         </label>
       </div>
