@@ -26,6 +26,7 @@
 
     margin-bottom: 12px;
     font-size: 24px;
+    font-weight: 400;
   }
 
   &__close {
@@ -71,23 +72,34 @@
     margin-bottom: 20px;
   }
 
-  &__submit {
-    padding: 10px 0;
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     margin-left: auto;
-    width: 33%;
+    gap: 12px;
 
+    width: 75%;
+  }
+
+  &__button {
     border: none;
-    border-radius: 10px;
+
+    cursor: pointer;
+  }
+
+  &__submit {
+    padding: 10px 15px;
 
     background-image: linear-gradient($c-yellow, $c-orange);
-    color: $c-white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 10px;
 
+    color: $c-white;
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    
-    cursor: pointer;
+
     transition: box-shadow 0.3s ease;
 
     &:hover {
@@ -98,6 +110,19 @@
       box-shadow: 
         rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
         rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+  }
+
+  &__delete {
+    width: 25px;
+    height: 25px;
+
+    background: url("../../../public/images/delete.svg") no-repeat center;
+
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
     }
   }
 }

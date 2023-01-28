@@ -28,8 +28,12 @@ export const EventForm: React.FC = () => {
   // const [time, setTime] = useState(new Date().getTime());
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
-  // const resetSelectEvent = () => dispatch(eventsActions.resetSelectedEvent());
 
+  const handleRemoveEvent = (id: number) => {
+    dispatch(eventsActions.remove(id));
+    dispatch(eventsActions.resetSelectedEvent());
+    setIsOpenForm(status => !status);
+  };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,10 +59,6 @@ export const EventForm: React.FC = () => {
       return;
     }
 
-
-
-
-
     addEvent(newEvent);
     setIsOpenForm(status => !status);
   };
@@ -66,7 +66,7 @@ export const EventForm: React.FC = () => {
   return (
     <form action="" className="event_form" onSubmit={(e) => onSubmit(e)}>
       <h2 className="event_form__title">
-        Add new event
+        {selectedEvent ? 'Update event' : 'Add new event'}
 
         <div 
           className="event_form__close" 
@@ -114,7 +114,19 @@ export const EventForm: React.FC = () => {
         </label>
       </div>
 
-      <button className="event_form__submit" type="submit">Add</button>
+      <div className="event_form__buttons">
+        {selectedEvent && (
+          <button 
+            className="event_form__button event_form__delete" 
+            type="button"
+            onClick={() => handleRemoveEvent(selectedEvent.id)}
+          ></button>
+        )}
+
+        <button className="event_form__button event_form__submit" type="submit">
+          {selectedEvent ? 'Update' : 'Add'}
+        </button>
+      </div>
     </form>
   );
 };
