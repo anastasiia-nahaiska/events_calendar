@@ -18,13 +18,19 @@ export const Event: React.FC<Props> = ({ event }) => {
   const selectedMonth = moment(selectedDate).month();
   const eventMonth = moment(event.date).month();
 
+  const open = () => {
+    setIsOpenForm(status => !status);
+    // eslint-disable-next-line no-console
+    console.log('open');
+  };
+
   return (
     <div 
       className={cn(
         "event",
         {"event--other_month": selectedMonth !== eventMonth}
       )}
-      onClick={() => setIsOpenForm(status => !status)}
+      onClick={open}
     >
       <span className="event__time">{event?.time || '-'}</span>
       <p className="event__title">{event.title}</p>

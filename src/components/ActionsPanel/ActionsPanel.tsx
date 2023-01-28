@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { EventFormContext } from '../../context/eventFormContext';
 import { EventForm } from '../EventForm';
 
 import { SetMonth } from "../SetMonth";
@@ -8,21 +9,17 @@ import './ActionsPanel.scss';
 
 
 export const ActionsPanel: React.FC = () => {
-  const [isOpenForm, setIsOpenForm] = useState(false);
+  const { isOpenForm, setIsOpenForm } = useContext(EventFormContext);
   
-  const onFormClick = () => {
-    setIsOpenForm(state => !state);
-  };
-
-  const onCloseFrom = () => {
-    setIsOpenForm(false);
-  };
-
   return (
     <div className="actions_panel">
       <div className="actions_panel__form">
-        <div className="actions_panel__open_form" onClick={onFormClick}></div>
-        {isOpenForm && <EventForm onCloseFrom={onCloseFrom} />}
+        <div 
+          className="actions_panel__open_form" 
+          onClick={() => setIsOpenForm(state => !state)}
+        ></div>
+
+        {isOpenForm && <EventForm />}
       </div>
 
       <SetMonth />

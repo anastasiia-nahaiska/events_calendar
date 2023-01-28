@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import moment from 'moment';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { actions as eventsActions } from "../../features/events";
 import { EventI } from "../../types/Event";
 
 import './EventForm.scss';
+import { EventFormContext } from "../../context/eventFormContext";
 
-type Props = {
-  onCloseFrom: () => void;
-};
 
-export const EventForm: React.FC<Props> = ({ onCloseFrom }) => {
+export const EventForm: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState(moment(new Date()).format(("YYYY-MM-DD")));
   // const [time, setTime] = useState(new Date().getTime());
+
+  const { setIsOpenForm } = useContext(EventFormContext);
+
   const events = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
@@ -34,7 +35,7 @@ export const EventForm: React.FC<Props> = ({ onCloseFrom }) => {
     };
 
     addEvent(newEvent);
-    onCloseFrom();
+    setIsOpenForm(status => !status);
   };
 
   return (
@@ -42,7 +43,10 @@ export const EventForm: React.FC<Props> = ({ onCloseFrom }) => {
       <p className="event_form__title">
         Add new event
 
-        <div className="event_form__close" onClick={onCloseFrom}></div>
+        <div 
+          className="event_form__close" 
+          onClick={() => setIsOpenForm(status => !status)}
+        ></div>
       </p>
 
       <label className="event_form__item" >

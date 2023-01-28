@@ -25,9 +25,9 @@ export const Cell: React.FC<Props> = ({
   const dispatch = useAppDispatch();
   const selectedDate = useAppSelector(state => state.selectedDate);
 
-  const setSelectedDate = (choosedDay: Date) => (
-    dispatch(selectedDayActions.set(choosedDay))
-  );
+  const setSelectedDate = (choosedDay: Date) => {
+    dispatch(selectedDayActions.set(choosedDay));
+  };
 
   const isSelected = moment(selectedDate).format("YYYY-MM-DD") 
     === moment(date).format("YYYY-MM-DD");
@@ -48,3 +48,4 @@ export const Cell: React.FC<Props> = ({
     </div>
   );
 };
+
