@@ -26,14 +26,18 @@ const eventsSlice = createSlice({
 
       return state;
     },
-    add: (state, action: PayloadAction<EventI>) => {
-      const doesEventExist = state.events.some(({ id }) => (
-        id === action.payload.id
-      ));
+    resetSelectedEvent: (state) => {
+      state.selectedEvent = null;
 
-      if (doesEventExist) {
+      return state;
+    },
+    add: (state, action: PayloadAction<EventI>) => {
+      const isUpdating = state.selectedEvent?.id === action.payload.id;
+     
+
+      if (isUpdating) {
         state.events = state.events.map(event => (
-          event.id === action.payload.id ? action.payload : event
+          event.id === state.selectedEvent?.id ? action.payload : event
         ));
       } else {
         state.events.push(action.payload);

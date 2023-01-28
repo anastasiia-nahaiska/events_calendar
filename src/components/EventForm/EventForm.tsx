@@ -9,16 +9,27 @@ import { EventFormContext } from "../../context/eventFormContext";
 
 
 export const EventForm: React.FC = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState(moment(new Date()).format(("YYYY-MM-DD")));
-  // const [time, setTime] = useState(new Date().getTime());
-
   const { setIsOpenForm } = useContext(EventFormContext);
-
+  const { selectedEvent } = useAppSelector(state => state.events);
   const { events } = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
+
+
+
+  const defaultTitle = selectedEvent ? selectedEvent.title : '';
+  const defaultDescription = selectedEvent ? selectedEvent.description : '';
+  const defaultDate = selectedEvent 
+    ? selectedEvent.date 
+    : moment(new Date()).format(("YYYY-MM-DD"));
+
+  const [title, setTitle] = useState(defaultTitle);
+  const [description, setDescription] = useState(defaultDescription);
+  const [date, setDate] = useState(defaultDate);
+  // const [time, setTime] = useState(new Date().getTime());
+
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
+  // const resetSelectEvent = () => dispatch(eventsActions.resetSelectedEvent());
+
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,8 +42,22 @@ export const EventForm: React.FC = () => {
       title,
       description,
       date,
-      id: events.length + 1
+      id: events.length + 1,
     };
+
+    if (selectedEvent) {
+      // eslint-disable-next-line no-console
+      console.log(selectedEvent);
+      addEvent({...newEvent, id: selectedEvent.id });
+      dispatch(eventsActions.resetSelectedEvent());
+      setIsOpenForm(status => !status);
+
+      return;
+    }
+
+
+
+
 
     addEvent(newEvent);
     setIsOpenForm(status => !status);
@@ -40,14 +65,14 @@ export const EventForm: React.FC = () => {
 
   return (
     <form action="" className="event_form" onSubmit={(e) => onSubmit(e)}>
-      <p className="event_form__title">
+      <h2 className="event_form__title">
         Add new event
 
         <div 
           className="event_form__close" 
           onClick={() => setIsOpenForm(status => !status)}
         ></div>
-      </p>
+      </h2>
 
       <label className="event_form__item" >
         Title
