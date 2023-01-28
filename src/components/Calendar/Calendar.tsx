@@ -17,12 +17,13 @@ export const Calendar: React.FC = () => {
   const visibleDates = getVisibleDates(selectedMonth, selectedYear);
   const now = new Date();
   const today = `${now.getDate()} ${now.getMonth()} ${now.getFullYear()}`;
+
   const [eventsInLS, setEventsInLS] = useStorage<EventI[]>([], 'events');
   const dispatch = useAppDispatch();
-  const events = useAppSelector(state => state.events);
+  const { events } = useAppSelector(state => state.events);
 
   const getEventsFromLocalStorage = (eventsFromLS: EventI[]) => (
-    dispatch(eventsActions.set(eventsFromLS))
+    dispatch(eventsActions.setEvents(eventsFromLS))
   );
 
   useEffect(() => {

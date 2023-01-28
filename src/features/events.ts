@@ -2,31 +2,46 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { EventI } from '../types/Event';
 
-const initialState: EventI[] = [];
+type eventsState = {
+  events: EventI[],
+  selectedEvent: EventI | null,
+};
+
+const initialState: eventsState = {
+  events: [],
+  selectedEvent: null
+};
 
 const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    set: (events, action: PayloadAction<EventI[]>) => {
-      events = action.payload;
+    setEvents: (state, action: PayloadAction<EventI[]>) => {
+      state.events = action.payload;
 
-      return events;
+      return state;
     },
-    add: (events, action: PayloadAction<EventI>) => {
-      const doesEventExist = events.some(({ id }) => id === action.payload.id);
+    setSelectedEvent: (state, action: PayloadAction<EventI>) => {
+      state.selectedEvent = action.payload;
+
+      return state;
+    },
+    add: (state, action: PayloadAction<EventI>) => {
+      const doesEventExist = state.events.some(({ id }) => (
+        id === action.payload.id
+      ));
 
       if (doesEventExist) {
-        events = events.map(event => (
+        state.events = state.events.map(event => (
           event.id === action.payload.id ? action.payload : event
         ));
       } else {
-        events.push(action.payload);
+        state.events.push(action.payload);
       }
     },
-    remove: (events, action: PayloadAction<number>)  => {
-      events = events.filter(({ id }) => id !== action.payload);
-    }
+    remove: (state, action: PayloadAction<number>)  => {
+      state.events = state.events.filter(({ id }) => id !== action.payload);
+    },
   },
 });
 

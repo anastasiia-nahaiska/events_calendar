@@ -1,5 +1,8 @@
+import { FormRegime } from "./FormRegime";
+
 export interface EventFormContextI {
   isOpenForm: boolean;
   setIsOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
-  closeForm: () => void;
+  setFormRegime: React.Dispatch<React.SetStateAction<FormRegime>>;
+  formRegime: FormRegime;
 }

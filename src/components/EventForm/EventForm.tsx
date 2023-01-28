@@ -16,7 +16,7 @@ export const EventForm: React.FC = () => {
 
   const { setIsOpenForm } = useContext(EventFormContext);
 
-  const events = useAppSelector(state => state.events);
+  const { events } = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
