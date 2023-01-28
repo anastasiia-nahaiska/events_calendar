@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import cn from "classnames";
 import moment from 'moment';
 
@@ -6,12 +6,14 @@ import { EventI } from "../../types/Event";
 
 import './Event.scss';
 import { useAppSelector } from "../../app/hooks";
+import { EventFormContext } from "../../context/eventFormContext";
 
 type Props = {
   event: EventI;
 };
 
 export const Event: React.FC<Props> = ({ event }) => {
+  const { setIsOpenForm } = useContext(EventFormContext);
   const selectedDate = useAppSelector(state => state.selectedDate);
   const selectedMonth = moment(selectedDate).month();
   const eventMonth = moment(event.date).month();
@@ -22,6 +24,7 @@ export const Event: React.FC<Props> = ({ event }) => {
         "event",
         {"event--other_month": selectedMonth !== eventMonth}
       )}
+      onClick={() => setIsOpenForm(status => !status)}
     >
       <span className="event__time">{event?.time || '-'}</span>
       <p className="event__title">{event.title}</p>

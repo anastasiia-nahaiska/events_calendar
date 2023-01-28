@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import './index.scss';
 import App from './App';
+import { EventFormContextProvider } from './context/eventFormContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <EventFormContextProvider>
+        <App />
+      </EventFormContextProvider>
     </Provider>
   </React.StrictMode>
 );
