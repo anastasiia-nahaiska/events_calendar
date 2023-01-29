@@ -20,12 +20,13 @@ export const EventForm: React.FC = () => {
   const defaultDescription = selectedEvent ? selectedEvent.description : '';
   const defaultTime  = selectedEvent ? selectedEvent.time : '';
   const defaultDate = selectedEvent ? selectedEvent.date : '';
+  const defaultColor = selectedEvent ? selectedEvent.color : '#ffa751';
 
   const [title, setTitle] = useState(defaultTitle);
   const [description, setDescription] = useState(defaultDescription);
   const [date, setDate] = useState(defaultDate);
   const [time, setTime] = useState(defaultTime);
-  const [color, setColor] = useState('#ffa751');
+  const [color, setColor] = useState(defaultColor);
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
