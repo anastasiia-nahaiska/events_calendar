@@ -1,12 +1,21 @@
-.date_picker {
+@import "../../styles/mixins/screen.scss";
+
+.date_picker {  
+  margin-left: 40px;
+
   &__icon {
     position: relative;
 
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 
     background: url("../../../public/images/calendar.svg") no-repeat center;
     border: none;
+
+    @include onTablet {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &__input {

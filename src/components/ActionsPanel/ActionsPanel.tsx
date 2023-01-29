@@ -23,10 +23,10 @@ export const ActionsPanel: React.FC = () => {
         {isOpenForm && <EventForm />}
       </div>
 
-      <div className="actions_panel__date">
-        <SetMonth />
-        <DatePicker />
-      </div>
+      {/* <div className="actions_panel__date"> */}
+      <SetMonth />
+      <DatePicker />
+      {/* </div> */}
     </div>
   );
 };

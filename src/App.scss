@@ -8,27 +8,28 @@
   gap: 12px;
 
   margin: 0 auto;
-  padding: 48px;
-  max-width: 300px;
+  padding: 20px 0;
+  max-width: 350px;
   height: 100vh;
 
   @include onTablet {
-    max-width: 728px;
+    padding: 48px 0;
+    max-width: 620px;
    }
 
   @include onDesktop {
-      max-width: 1120px;
+    max-width: 1140px;
+    width: 100%;
   }
 
   &__background {
     position: absolute;
     z-index: -1;
-    // width: 200px;
+
     left: 0px;
     right: 0px;
     top: 0px;
-    bottom: 66%;
-    // height: 300px;
+    bottom: 60%;
 
     background-image: linear-gradient($c-yellow, $c-orange);
 

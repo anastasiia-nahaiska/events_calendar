@@ -1,8 +1,9 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins/screen.scss";
 
 .dayOfWeek {
   color: $c-black;
-  font-size: 28px;
+  font-size: 16px;
   font-weight: 500;
   text-transform: uppercase;
 
@@ -10,5 +11,9 @@
 
   &--current {
     color: $c-red;
+  }
+
+  @include onTablet {
+    font-size: 28px;
   }
 }
