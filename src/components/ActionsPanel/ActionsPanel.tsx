@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { EventFormContext } from '../../context/eventFormContext';
+import { DatePicker } from '../DatePicker';
 import { EventForm } from '../EventForm';
 
 import { SetMonth } from "../SetMonth";
@@ -22,8 +23,10 @@ export const ActionsPanel: React.FC = () => {
         {isOpenForm && <EventForm />}
       </div>
 
-      <SetMonth />
-      
+      <div className="actions_panel__date">
+        <SetMonth />
+        <DatePicker />
+      </div>
     </div>
   );
 };

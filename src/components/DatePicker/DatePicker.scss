@@ -1,0 +1,22 @@
+.date_picker {
+
+  &__icon {
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    background: url("../../../public/images/calendar.svg") no-repeat center;
+  }
+
+  &__input {
+    position: absolute;
+    z-index: -1;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+
+    opacity: 0;
+  }
+}
