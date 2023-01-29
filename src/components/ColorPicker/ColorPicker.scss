@@ -1,0 +1,31 @@
+@import "../../styles/variables.scss";
+.color_picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 16px;
+
+  &__input {
+    width: 25px;
+    height: 25px;
+  
+  
+    appearance: none;
+    background-color: transparent;
+    border: none;
+  
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    cursor: pointer;
+  
+    &::-webkit-color-swatch {
+      border-radius: 50%; 
+    }
+  
+    &::-moz-color-swatch {
+      border-radius: 50%;
+    }
+  }
+}

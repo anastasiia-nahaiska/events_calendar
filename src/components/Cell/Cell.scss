@@ -18,12 +18,27 @@
 
   overflow-y: auto;
 
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb {
+    width: 10px;
+    height: 10px; 
+    border-radius: 13px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+    box-shadow: inset 0 0 5px $c-white;
+    color: #dddddd;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 12px;
+  }
+
   &__date {
     margin-bottom: 6px;
 
     font-size: 12px;
 
-    @include onTablet {
+    @include onDesktop {
       font-size: 16px;
     }
   }

@@ -3,5 +3,6 @@ export interface EventI {
   description?: string;
   date: string;
   time?: string;
+  color: string;
   id: number;
 }

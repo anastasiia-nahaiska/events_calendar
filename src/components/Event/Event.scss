@@ -22,7 +22,7 @@
 
   cursor: pointer;
 
-  @include onTablet {
+  @include onDesktop {
     gap: 6px;
     padding: 2px 6px;
 

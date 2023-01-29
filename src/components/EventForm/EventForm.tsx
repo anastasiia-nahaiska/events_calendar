@@ -6,6 +6,7 @@ import { EventI } from "../../types/Event";
 
 import './EventForm.scss';
 import { EventFormContext } from "../../context/eventFormContext";
+import { ColorPicker } from "../ColorPicker";
 // import { selectedDateContext } from "../../context/selectedDateContext";
 
 
@@ -24,6 +25,7 @@ export const EventForm: React.FC = () => {
   const [description, setDescription] = useState(defaultDescription);
   const [date, setDate] = useState(defaultDate);
   const [time, setTime] = useState(defaultTime);
+  const [color, setColor] = useState('#ffa751');
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
@@ -35,6 +37,10 @@ export const EventForm: React.FC = () => {
   const handleRemoveEvent = (id: number) => {
     dispatch(eventsActions.remove(id));
     handleClosingForm();
+  };
+
+  const handleChangingColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColor(e.target.value);
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,6 +55,7 @@ export const EventForm: React.FC = () => {
       description,
       date,
       time,
+      color,
       id: events.length + 1,
     };
 
@@ -115,6 +122,12 @@ export const EventForm: React.FC = () => {
           />
         </label>
       </div>
+
+      <ColorPicker 
+        color={color} 
+        className="event_form__color_picker" 
+        handleChangingColor={handleChangingColor}
+      />
 
       <div className="event_form__buttons">
         {selectedEvent && (
