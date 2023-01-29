@@ -1,24 +1,50 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { actions as selectedDateActions } from '../../features/selectedDate';
+import React, { useContext } from 'react';
+import moment from 'moment';
+import { selectedDateContext } from '../../context/selectedDateContext';
 
 import './SetMonth.scss';
 
 export const SetMonth: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const selectedDate = useAppSelector(state => state.selectedDate);
-  const setNextMonth = () => dispatch(selectedDateActions.setNextMonth());
-  const setPrevMonth = () => dispatch(selectedDateActions.setPrevMonth());
+  const { 
+    saveMonth,
+    saveYear,
+    month,
+    year,
+  } = useContext(selectedDateContext);
+
+  const setNextMonth = (currMonth: number, currYear: number) => {
+    if (currMonth === 11) {
+      saveMonth(0);
+      saveYear(currYear + 1);
+    } else {
+      saveMonth(currMonth + 1);
+    }
+  };
+
+  const setPrevMonth = (currMonth: number, currYear: number)  => {
+    if (currMonth === 0) {
+      saveMonth(11);
+      saveYear(currYear - 1);
+    } else {
+      saveMonth(currMonth - 1);
+    }
+  };
 
   return (
     <div className="set_month">
-      <button className="set_month__button" onClick={setPrevMonth}></button>
+      <button 
+        className="set_month__button" 
+        onClick={() => setPrevMonth(+month, +year)}
+      ></button>
 
       <p className="set_month__curr_month">
-        {`${selectedDate.toLocaleString('default', { month: 'long' })} ${selectedDate.getFullYear()}`}
+        {`${moment().month(month).format("MMMM")} ${year}`}
       </p>
 
-      <button className="set_month__button" onClick={setNextMonth}></button>
+      <button 
+        className="set_month__button" 
+        onClick={() => setNextMonth(+month, +year)}
+      ></button>
     </div>
   );
 };

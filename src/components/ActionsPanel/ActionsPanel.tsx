@@ -15,10 +15,10 @@ export const ActionsPanel: React.FC = () => {
   return (
     <div className="actions_panel">
       <div className="actions_panel__form">
-        <div 
+        <button 
           className="actions_panel__open_form" 
           onClick={() => setIsOpenForm(state => !state)}
-        ></div>
+        ></button>
 
         {isOpenForm && <EventForm />}
       </div>

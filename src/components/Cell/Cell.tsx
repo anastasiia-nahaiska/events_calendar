@@ -6,37 +6,46 @@ import moment from 'moment';
 import './Cell.scss';
 import { EventI } from '../../types/Event';
 import { Event } from '../Event';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { actions as selectedDayActions } from '../../features/selectedDate';
 import { EventFormContext } from '../../context/eventFormContext';
+import { selectedDateContext } from '../../context/selectedDateContext';
 
 type Props = {
   date: Date;
   isOtherMonth: boolean;
-  isToday: boolean;
   events: EventI[];
 };
 
 export const Cell: React.FC<Props> = ({ 
   date, 
   isOtherMonth, 
-  isToday, 
   events 
 }) => {
-  const dispatch = useAppDispatch();
-  const selectedDate = useAppSelector(state => state.selectedDate);
+  const { 
+    saveMonth,
+    saveDay,
+    saveYear,
+    month,
+    year,
+    day,
+  } = useContext(selectedDateContext);
+
   const { setIsOpenForm } = useContext(EventFormContext);
 
-  const setSelectedDate = (choosedDay: Date) => {
-    dispatch(selectedDayActions.set(choosedDay));
+  const onClick = () => {
+    saveMonth(date);
+    saveDay(date);
+    saveYear(date);
   };
 
-  const isSelected = moment(selectedDate).format("YYYY-MM-DD") 
-    === moment(date).format("YYYY-MM-DD");
+  const isSelected = `${year}-${month}-${day}`
+    === `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+  const isToday = moment(new Date()).format('YYYY-MM-DD') 
+    === moment(date).format('YYYY-MM-DD');
 
   return (
     <div 
-      onClick={() => setSelectedDate(date)}
+      onClick={onClick}
       onDoubleClick={() => setIsOpenForm(status => !status)}
       className={cn(
         "cell",

@@ -1,5 +1,4 @@
 .date_picker {
-
   &__icon {
     position: relative;
 
@@ -7,6 +6,7 @@
     height: 40px;
 
     background: url("../../../public/images/calendar.svg") no-repeat center;
+    border: none;
   }
 
   &__input {

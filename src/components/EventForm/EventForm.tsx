@@ -1,35 +1,29 @@
 import React, { useContext, useState } from "react";
-import moment from 'moment';
+// import moment from 'moment';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { actions as eventsActions } from "../../features/events";
 import { EventI } from "../../types/Event";
 
 import './EventForm.scss';
 import { EventFormContext } from "../../context/eventFormContext";
+// import { selectedDateContext } from "../../context/selectedDateContext";
 
 
 export const EventForm: React.FC = () => {
   const { setIsOpenForm } = useContext(EventFormContext);
   const { selectedEvent } = useAppSelector(state => state.events);
-  const selectedDate = useAppSelector(state => state.selectedDate);
   const { events } = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
 
-
-
   const defaultTitle = selectedEvent ? selectedEvent.title : '';
   const defaultDescription = selectedEvent ? selectedEvent.description : '';
-  const defaultDate = selectedEvent 
-    ? selectedEvent.date 
-    : moment(selectedDate).format(("YYYY-MM-DD"));
+  const defaultTime  = selectedEvent ? selectedEvent.time : '';
+  const defaultDate = selectedEvent ? selectedEvent.date : '';
 
   const [title, setTitle] = useState(defaultTitle);
   const [description, setDescription] = useState(defaultDescription);
   const [date, setDate] = useState(defaultDate);
-  const [time, setTime] = useState('');
-
-  // eslint-disable-next-line no-console
-  console.log(time);
+  const [time, setTime] = useState(defaultTime);
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
@@ -74,10 +68,10 @@ export const EventForm: React.FC = () => {
       <h2 className="event_form__title">
         {selectedEvent ? 'Update event' : 'Add new event'}
 
-        <div 
+        <button 
           className="event_form__close" 
           onClick={handleClosingForm}
-        ></div>
+        ></button>
       </h2>
 
       <label className="event_form__item" >
