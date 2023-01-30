@@ -31,16 +31,18 @@ export const Event: React.FC<Props> = ({ event }) => {
   };
 
   return (
-    <button 
-      className={cn(
-        "event",
-        { "event--other_month": +month !== eventMonth }
-      )}
-      onClick={handleOpeningForm}
-      style={{ backgroundColor: event.color }}
-    >
-      <span className="event__time">{event?.time}</span>
-      <p className="event__title">{event.title}</p>
-    </button>
+    <li>
+      <button 
+        className={cn(
+          "event",
+          { "event--other_month": +month !== eventMonth }
+        )}
+        onClick={handleOpeningForm}
+        style={{ backgroundColor: event.color }}
+      >
+        <span className="event__time">{event?.time}</span>
+        <p className="event__title">{event.title}</p>
+      </button>
+    </li>
   );
 };

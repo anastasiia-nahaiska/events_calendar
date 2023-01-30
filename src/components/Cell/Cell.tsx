@@ -44,7 +44,7 @@ export const Cell: React.FC<Props> = ({
     === moment(date).format('YYYY-MM-DD');
 
   return (
-    <div 
+    <li 
       onClick={onClick}
       onDoubleClick={() => setIsOpenForm(status => !status)}
       className={cn(
@@ -56,8 +56,10 @@ export const Cell: React.FC<Props> = ({
     >
       <p className="cell__date">{date.getDate()}</p>
 
-      {events.map(event => <Event key={event.id} event={event} />)}
-    </div>
+      <ul>
+        {events.map(event => <Event key={event.id} event={event} />)}
+      </ul>
+    </li>
   );
 };
 

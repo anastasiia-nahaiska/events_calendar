@@ -5,4 +5,6 @@ export interface EventI {
   time?: string;
   color: string;
   id: number;
+  createdAt: string | null;
+  updatedAt: string | null;
 }

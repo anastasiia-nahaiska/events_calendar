@@ -48,17 +48,19 @@ export const Calendar: React.FC = () => {
 
 
   return (
-    <div className="calendar">
+    <div>
       <DaysOfWeek />
 
-      {visibleDates.map(date => (
-        <Cell 
-          key={`${date.getDate()}` + `${date.getMonth()}`}
-          date={date} 
-          isOtherMonth={+month !== date.getMonth()}
-          events={getFilteredEvents(date, events)}
-        />
-      ))}   
+      <ul className="calendar">
+        {visibleDates.map(date => (
+          <Cell 
+            key={`${date.getDate()}` + `${date.getMonth()}`}
+            date={date} 
+            isOtherMonth={+month !== date.getMonth()}
+            events={getFilteredEvents(date, events)}
+          />
+        ))}
+      </ul>
     </div>
   );
 };

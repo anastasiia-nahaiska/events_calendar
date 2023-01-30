@@ -6,9 +6,9 @@
 
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  // gap: 24px;
 
-  padding: 30px;
+  padding: 30px 40px;
   width: max-content;
 
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -24,6 +24,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 30px;
 
     margin-bottom: 12px;
     font-size: 24px;
@@ -41,10 +42,20 @@
     cursor: pointer;
   }
 
+  &__creating_info {
+    font-size: 14px;
+    font-weight: 400;
+    color: $c-dark-gray;
+
+    margin-bottom: 30px;
+  }
+
   &__item {
     display: flex;
     flex-direction: column; 
     gap: 8px;
+
+    margin-bottom: 24px;
 
     font-size: 16px;
   }
@@ -76,7 +87,7 @@
   }
 
   &__color_picker {
-    margin-top: auto;
+    margin-bottom: 40px;
   }
 
   &__buttons {

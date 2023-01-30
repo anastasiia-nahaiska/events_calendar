@@ -1,19 +1,31 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins/screen.scss";
 
-.dayOfWeek {
-  color: $c-black;
-  font-size: 16px;
-  font-weight: 500;
-  text-transform: uppercase;
+.days_of_week {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
 
-  color: $c-white;
+  padding: 40px 0;
 
-  &--current {
-    color: $c-red;
+  &__day {
+    width: 100%;
+
+    color: $c-black;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+  
+    color: $c-white;
+  
+    &--current {
+      color: $c-red;
+    }
+  
+    @include onTablet {
+      font-size: 28px;
+    }
   }
 
-  @include onTablet {
-    font-size: 28px;
-  }
 }

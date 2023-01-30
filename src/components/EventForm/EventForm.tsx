@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-// import moment from 'moment';
+import moment from 'moment';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { actions as eventsActions } from "../../features/events";
 import { EventI } from "../../types/Event";
@@ -7,11 +7,11 @@ import { EventI } from "../../types/Event";
 import './EventForm.scss';
 import { EventFormContext } from "../../context/eventFormContext";
 import { ColorPicker } from "../ColorPicker";
-// import { selectedDateContext } from "../../context/selectedDateContext";
-
+import { selectedDateContext } from "../../context/selectedDateContext";
 
 export const EventForm: React.FC = () => {
   const { setIsOpenForm } = useContext(EventFormContext);
+  const { month, year, day } = useContext(selectedDateContext);
   const { selectedEvent } = useAppSelector(state => state.events);
   const { events } = useAppSelector(state => state.events);
   const dispatch = useAppDispatch();
@@ -19,7 +19,9 @@ export const EventForm: React.FC = () => {
   const defaultTitle = selectedEvent ? selectedEvent.title : '';
   const defaultDescription = selectedEvent ? selectedEvent.description : '';
   const defaultTime  = selectedEvent ? selectedEvent.time : '';
-  const defaultDate = selectedEvent ? selectedEvent.date : '';
+  const defaultDate = selectedEvent 
+    ? selectedEvent.date 
+    : moment(new Date(+year, +month, +day)).format('YYYY-MM-DD');
   const defaultColor = selectedEvent ? selectedEvent.color : '#ffa751';
 
   const [title, setTitle] = useState(defaultTitle);
@@ -27,6 +29,8 @@ export const EventForm: React.FC = () => {
   const [date, setDate] = useState(defaultDate);
   const [time, setTime] = useState(defaultTime);
   const [color, setColor] = useState(defaultColor);
+
+  
 
   const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
 
@@ -58,12 +62,32 @@ export const EventForm: React.FC = () => {
       time,
       color,
       id: events.length + 1,
+      createdAt: moment(new Date()).format('DD-MM-YYYY HH:mm:ss'),
+      updatedAt: null,
     };
 
-    if (selectedEvent) {
-      addEvent({...newEvent, id: selectedEvent.id });
+    const updateSomething = JSON.stringify({
+      ...newEvent,
+      id: selectedEvent?.id,
+      createdAt: selectedEvent?.createdAt
+    }) !== JSON.stringify(selectedEvent);
+
+
+    if (selectedEvent && updateSomething) {
+      addEvent({
+        ...newEvent,
+        id: selectedEvent.id,
+        createdAt: selectedEvent.createdAt,
+        updatedAt: moment(new Date()).format('DD-MM-YYYY HH:mm:ss'),
+      });
       handleClosingForm();
 
+      return;
+    }
+
+    if (selectedEvent && !updateSomething) {
+      handleClosingForm();
+  
       return;
     }
 
@@ -81,6 +105,17 @@ export const EventForm: React.FC = () => {
           onClick={handleClosingForm}
         ></button>
       </h2>
+
+      <div className="event_form__creating_info">
+
+        {selectedEvent !== null 
+          && !selectedEvent.updatedAt
+          && `Created at ${selectedEvent.createdAt?.slice(0, -3)}`}
+        
+        {selectedEvent !== null 
+          && selectedEvent.updatedAt
+          && `Updated at ${selectedEvent.updatedAt?.slice(0, -3)}`}
+      </div>
 
       <label className="event_form__item" >
         Title
