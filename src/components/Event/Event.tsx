@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import cn from "classnames";
+import React, { useCallback, useContext } from 'react';
+import cn from 'classnames';
 import moment from 'moment';
 
-import { EventI } from "../../types/Event";
-import { EventFormContext } from "../../context/eventFormContext";
-import { useDispatch } from "react-redux";
-import { actions as eventsActions } from "../../features/events";
-import { selectedDateContext } from "../../context/selectedDateContext";
+import { EventI } from '../../types/Event';
+import { EventFormContext } from '../../context/eventFormContext';
+import { useDispatch } from 'react-redux';
+import { actions as eventsActions } from '../../features/events';
+import { selectedDateContext } from '../../context/selectedDateContext';
 
 import './Event.scss';
 
@@ -21,21 +21,21 @@ export const Event: React.FC<Props> = ({ event }) => {
 
   const eventMonth = moment(event.date).month();
 
-  const selectEvent = (selectedEvent: EventI) => (
+  const selectEvent = useCallback((selectedEvent: EventI) => (
     dispatch(eventsActions.setSelectedEvent(selectedEvent))
-  );
+  ), []);
 
-  const handleOpeningForm = () => {
+  const handleOpeningForm = useCallback(() => {
     setIsOpenForm(status => !status);
     selectEvent(event);
-  };
-
+  }, [event]);
+  
   return (
     <li>
       <button 
         className={cn(
-          "event",
-          { "event--other_month": +month !== eventMonth }
+          'event',
+          { 'event--other_month': +month !== eventMonth }
         )}
         onClick={handleOpeningForm}
         style={{ backgroundColor: event.color }}

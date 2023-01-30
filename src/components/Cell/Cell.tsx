@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
 
@@ -31,11 +30,11 @@ export const Cell: React.FC<Props> = ({
 
   const { setIsOpenForm } = useContext(EventFormContext);
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     saveMonth(date);
     saveDay(date);
     saveYear(date);
-  };
+  }, [date]);
 
   const isSelected = `${year}-${month}-${day}`
     === `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
@@ -48,10 +47,10 @@ export const Cell: React.FC<Props> = ({
       onClick={onClick}
       onDoubleClick={() => setIsOpenForm(status => !status)}
       className={cn(
-        "cell",
-        {"cell--another_month": isOtherMonth},
-        {"cell--today": isToday},
-        {"cell--selected": isSelected}
+        'cell',
+        {'cell--another_month': isOtherMonth},
+        {'cell--today': isToday},
+        {'cell--selected': isSelected}
       )}
     >
       <p className="cell__date">{date.getDate()}</p>

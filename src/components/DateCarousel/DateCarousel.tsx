@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import moment from 'moment';
 import { selectedDateContext } from '../../context/selectedDateContext';
 
-import './SetMonth.scss';
+import './DateCarousel.scss';
 
-export const SetMonth: React.FC = () => {
+export const DateCarousel: React.FC = () => {
   const { 
     saveMonth,
     saveYear,
@@ -12,37 +12,37 @@ export const SetMonth: React.FC = () => {
     year,
   } = useContext(selectedDateContext);
 
-  const setNextMonth = (currMonth: number, currYear: number) => {
+  const setNextMonth = useCallback((currMonth: number, currYear: number) => {
     if (currMonth === 11) {
       saveMonth(0);
       saveYear(currYear + 1);
     } else {
       saveMonth(currMonth + 1);
     }
-  };
+  }, []);
 
-  const setPrevMonth = (currMonth: number, currYear: number)  => {
+  const setPrevMonth = useCallback((currMonth: number, currYear: number)  => {
     if (currMonth === 0) {
       saveMonth(11);
       saveYear(currYear - 1);
     } else {
       saveMonth(currMonth - 1);
     }
-  };
+  }, []);
 
   return (
-    <div className="set_month">
+    <div className="date_carousel">
       <button 
-        className="set_month__button" 
+        className="date_carousel__button" 
         onClick={() => setPrevMonth(+month, +year)}
       ></button>
 
-      <p className="set_month__curr_month">
-        {`${moment().month(month).format("MMMM")} ${year}`}
+      <p className="date_carousel__curr_month">
+        {`${moment().month(month).format('MMMM')} ${year}`}
       </p>
 
       <button 
-        className="set_month__button" 
+        className="date_carousel__button" 
         onClick={() => setNextMonth(+month, +year)}
       ></button>
     </div>

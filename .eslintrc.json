@@ -17,7 +17,8 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "semi": "off",
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
     "@typescript-eslint/semi": ["error", "always"],
     "prefer-const": 2,
     "curly": [2, "all"],
@@ -51,6 +52,7 @@
     "react/state-in-constructor": [2, "never"],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "react/display-name": "off",
 
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": ["error"],

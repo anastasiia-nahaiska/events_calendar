@@ -8,7 +8,7 @@ type Props = {
   className?: string; 
 };
 
-export const ColorPicker: React.FC<Props> = ({ 
+export const ColorPicker: React.FC<Props> = React.memo(({ 
   color, 
   handleChangingColor, 
   className 
@@ -22,5 +22,4 @@ export const ColorPicker: React.FC<Props> = ({
       onChange={(e) => handleChangingColor(e)}
     />
   </label>
-
-);
+));

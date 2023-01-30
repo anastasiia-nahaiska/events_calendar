@@ -4,7 +4,7 @@ import { daysOfWeek } from './constants';
 
 import './DaysOfWeek.scss';
 
-export const DaysOfWeek: React.FC = () => (
+export const DaysOfWeek: React.FC = React.memo(() => (
   <ul className="days_of_week">
     {daysOfWeek.map(({ day, id }) => (
       <li 
@@ -15,5 +15,4 @@ export const DaysOfWeek: React.FC = () => (
       </li> 
     ))}
   </ul>
-);
-
+));

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getVisibleDates } from '../../utils/getVisibleDates';
 import { Cell } from '../Cell';
@@ -17,24 +17,27 @@ export const Calendar: React.FC = () => {
     year,
   } = useContext(selectedDateContext);
 
-  const visibleDates = getVisibleDates(+month, +year);
-
-  
+  const visibleDates = useMemo(() => (
+    getVisibleDates(+month, +year)
+  ), [month, year]);
 
   const [eventsInLS, setEventsInLS] = useStorage<EventI[]>([], 'events');
 
   const dispatch = useAppDispatch();
   const { events } = useAppSelector(state => state.events);
 
-  const getEventsFromLocalStorage = (eventsFromLS: EventI[]) => (
+  const getEventsFromLocalStorage = useCallback((eventsFromLS: EventI[]) => (
     dispatch(eventsActions.setEvents(eventsFromLS))
-  );
+  ), []);
 
-  const getFilteredEvents = (targetDay: Date, allEvents: EventI[]) => (
+  const getFilteredEvents = useCallback((
+    targetDay: Date,
+    allEvents: EventI[]
+  ) => (
     allEvents.filter(event => (
       moment(targetDay).format().slice(0, 10) === event.date
     ))
-  );
+  ), []);
 
   useEffect(() => {
     getEventsFromLocalStorage(eventsInLS);

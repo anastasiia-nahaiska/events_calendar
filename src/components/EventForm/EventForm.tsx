@@ -1,13 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from 'react';
 import moment from 'moment';
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { actions as eventsActions } from "../../features/events";
-import { EventI } from "../../types/Event";
+
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { actions as eventsActions } from '../../features/events';
+import { EventI } from '../../types/Event';
+
+import { EventFormContext } from '../../context/eventFormContext';
+import { ColorPicker } from '../ColorPicker';
+import { selectedDateContext } from '../../context/selectedDateContext';
 
 import './EventForm.scss';
-import { EventFormContext } from "../../context/eventFormContext";
-import { ColorPicker } from "../ColorPicker";
-import { selectedDateContext } from "../../context/selectedDateContext";
 
 export const EventForm: React.FC = () => {
   const { setIsOpenForm } = useContext(EventFormContext);
@@ -30,25 +32,27 @@ export const EventForm: React.FC = () => {
   const [time, setTime] = useState(defaultTime);
   const [color, setColor] = useState(defaultColor);
 
-  
+  const addEvent = useCallback((event: EventI) => (
+    dispatch(eventsActions.add(event))
+  ), []);
 
-  const addEvent = (event: EventI) => dispatch(eventsActions.add(event));
-
-  const handleClosingForm = () => {
+  const handleClosingForm = useCallback(() => {
     setIsOpenForm(status => !status);
     dispatch(eventsActions.resetSelectedEvent());
-  };
+  }, []);
 
-  const handleRemoveEvent = (id: number) => {
+  const handleRemoveEvent = useCallback((id: number) => {
     dispatch(eventsActions.remove(id));
     handleClosingForm();
-  };
+  }, []);
 
-  const handleChangingColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangingColor = useCallback((
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setColor(e.target.value);
-  };
+  }, []);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!title.length || !date.length) {
@@ -93,7 +97,7 @@ export const EventForm: React.FC = () => {
 
     addEvent(newEvent);
     setIsOpenForm(status => !status);
-  };
+  }, [title, description, date, time, color, selectedEvent]);
 
   return (
     <form action="" className="event_form" onSubmit={(e) => onSubmit(e)}>

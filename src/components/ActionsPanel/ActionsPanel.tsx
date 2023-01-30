@@ -3,7 +3,7 @@ import { EventFormContext } from '../../context/eventFormContext';
 import { DatePicker } from '../DatePicker';
 import { EventForm } from '../EventForm';
 
-import { SetMonth } from "../SetMonth";
+import { DateCarousel } from '../DateCarousel';
 
 import './ActionsPanel.scss';
 
@@ -23,10 +23,9 @@ export const ActionsPanel: React.FC = () => {
         {isOpenForm && <EventForm />}
       </div>
 
-      {/* <div className="actions_panel__date"> */}
-      <SetMonth />
+      <DateCarousel />
       <DatePicker />
-      {/* </div> */}
+
     </div>
   );
 };

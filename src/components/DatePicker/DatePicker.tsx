@@ -18,13 +18,15 @@ export const DatePicker: React.FC = () => {
     }
   }, []);
 
-  const selectDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const selectDate = useCallback((
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const [year, month, day] = event.target.value.split('-');
 
     saveMonth(+month - 1);
     saveDay(+day);
     saveYear(+year);
-  };
+  }, []);
 
   return (
     <div className="date_picker">

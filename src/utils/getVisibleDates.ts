@@ -1,28 +1,3 @@
-// export const getVisibleDates = (month: number, year: number) => {
-//   const allDaysInMonth = Array.from(
-//     { length: new Date(year, month, 0).getDate() },
-//     (_, i) => new Date(year, month - 1, i + 1)
-//   );
-
-//   const firstDayOfMonth = allDaysInMonth[0].getDay();
-//   const lastDayOfMonth = allDaysInMonth[allDaysInMonth.length - 1].getDay();
-//   const dates = [];
-//   const currDate = new Date(allDaysInMonth[0]);
-
-//   for (let i = firstDayOfMonth; i > 0; i--) {
-//     const previusDay = new Date(currDate.setDate(currDate.getDate() - 1));
-//     dates.unshift(previusDay);
-//   }
-
-//   dates.push(...allDaysInMonth)
-  
-//   for (let i = 1; i < 7 - lastDayOfMonth; i++) {
-//     dates.push(new Date(year, month + 1, i));
-//   } 
-
-//   return dates;
-// }
-
 export const getVisibleDates = (month: number, year: number) => {
   const visibleDaysInPrevMonth = Array
     .from(

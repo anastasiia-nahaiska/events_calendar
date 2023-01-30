@@ -10,7 +10,6 @@
 
   @include onTablet {
     justify-content: flex-start;
-
   }
 
   &__form {
@@ -40,20 +39,6 @@
     @include onTablet {
       width: 70px;
       height: 70px;
-    }
-  }
-
-  &__date {
-    display: flex;
-    align-items: center;
-    // gap: 16px;
-
-    width: 100%;
-    justify-content: space-between;
-
-    @include onTablet {
-      gap: 30px;
-
     }
   }
 }
