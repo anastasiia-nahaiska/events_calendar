@@ -45,8 +45,6 @@ export const Calendar: React.FC = () => {
     setEventsInLS(events);
   }, [events]);
 
-
-
   return (
     <div>
       <DaysOfWeek />
